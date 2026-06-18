@@ -11,3 +11,4 @@ COUNT(*) AS total_providers
 FROM MUP_PHY_R26_P05_V10_D24_Prov
 GROUP BY provider_volume
 ORDER BY total_providers DESC
+-- Week 2 Query 2: Provider Adjustment Rate Analysis
