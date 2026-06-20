@@ -25,3 +25,17 @@ WHERE Tot_Sbmtd_Chrg > 0
 GROUP BY state
 ORDER BY denied_providers DESC
 LIMIT 10
+-- Week 2 Query 5: Days in AR by State
+-- Measures how long outstanding Medicare payments sit uncollected
+
+SELECT
+Rndrng_Prvdr_State_Abrvtn AS state,
+ROUND(SUM(Tot_Sbmtd_Chrg), 2) AS total_billed,
+ROUND(SUM(Tot_Mdcr_Pymt_Amt), 2) AS total_paid,
+ROUND(SUM(Tot_Sbmtd_Chrg - Tot_Mdcr_Pymt_Amt), 2) AS outstanding,
+ROUND(SUM(Tot_Sbmtd_Chrg - Tot_Mdcr_Pymt_Amt) / (SUM(Tot_Sbmtd_Chrg) / 365), 1) AS days_in_ar
+FROM MUP_PHY_R26_P05_V10_D24_Prov
+WHERE Tot_Sbmtd_Chrg > 0
+GROUP BY state
+ORDER BY days_in_ar DESC
+LIMIT 10
